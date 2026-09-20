@@ -1,0 +1,9 @@
+{
+  "event_id": "sample-012",
+  "event_type": "MATERIAL_ACCESSIONED",
+  "aggregate_type": "biological_material",
+  "aggregate_id": "aggregate-012",
+  "occurred_at": "2026-09-20T12:00:00+08:00",
+  "version": 1,
+  "summary": "中药细胞株科研谱系领域样例"
+}
