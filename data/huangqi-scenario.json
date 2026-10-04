@@ -1,0 +1,131 @@
+[
+  {
+    "event_id": "hq-0001",
+    "event_type": "MATERIAL_ACCESSIONED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "HQ-ROOT-001",
+    "occurred_at": "2026-03-02T09:00:00+08:00",
+    "version": 1,
+    "summary": "材料登记：黄芪毛状根原始株",
+    "payload": {
+      "species": "Astragalus membranaceus",
+      "strain_name": "黄芪毛状根原始株",
+      "aliases": ["胡氏细胞株后代"],
+      "team": "种质资源组"
+    }
+  },
+  {
+    "event_id": "hq-0002",
+    "event_type": "PASSAGE_RECORDED",
+    "aggregate_type": "culture_passage",
+    "aggregate_id": "PS-2026-01",
+    "occurred_at": "2026-03-20T10:30:00+08:00",
+    "version": 1,
+    "summary": "传代：HQ-ROOT-001 → HQ-P1-002",
+    "payload": {
+      "parent_material_id": "HQ-ROOT-001",
+      "child_material_id": "HQ-P1-002",
+      "passage_number": 1,
+      "conditions": { "medium": "1/2 MS", "IBA_mg_L": 0.5, "temperature_C": 25 },
+      "operator": "王某",
+      "team": "种质资源组"
+    }
+  },
+  {
+    "event_id": "hq-0003",
+    "event_type": "CONTAMINATION_CHECK_RECORDED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "HQ-P1-002",
+    "occurred_at": "2026-04-01T14:00:00+08:00",
+    "version": 1,
+    "summary": "污染检查：HQ-P1-002 pass",
+    "payload": { "check_type": "内生菌", "result": "pass", "method": "PCR", "lab": "平台检测室" }
+  },
+  {
+    "event_id": "hq-0004",
+    "event_type": "ALIQUOT_CREATED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "HQ-P1-002-A",
+    "occurred_at": "2026-04-10T11:00:00+08:00",
+    "version": 1,
+    "summary": "分装：HQ-P1-002 → HQ-P1-002-A",
+    "payload": { "parent_material_id": "HQ-P1-002", "vial_count": 12, "freezer_location": "液氮罐 A-3" }
+  },
+  {
+    "event_id": "hq-0005",
+    "event_type": "CONSTRUCT_INTRODUCED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "HQ-OE-AS",
+    "occurred_at": "2026-05-08T16:00:00+08:00",
+    "version": 1,
+    "summary": "基因构建：HQ-P1-002 → HQ-OE-AS",
+    "payload": {
+      "parent_material_id": "HQ-P1-002",
+      "construct": { "vector": "pCAMBIA1301", "gene": "AmAS", "method": "农杆菌介导" }
+    }
+  },
+  {
+    "event_id": "hq-0006",
+    "event_type": "RUN_COMPLETED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-014",
+    "occurred_at": "2026-06-15T18:00:00+08:00",
+    "version": 1,
+    "summary": "实验完成：RUN-2026-014（success）",
+    "payload": {
+      "team": "代谢组",
+      "protocol": "毛状根液体培养与黄芪甲苷测定",
+      "parameters": { "培养天数": 28, "接种量_g": 2.0 },
+      "material_ids": ["HQ-OE-AS"],
+      "outcome": "success",
+      "retention_class": "standard"
+    }
+  },
+  {
+    "event_id": "hq-0007",
+    "event_type": "RAW_DATA_REGISTERED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-014",
+    "occurred_at": "2026-06-15T18:05:00+08:00",
+    "version": 2,
+    "summary": "原始数据留版：lcms://raw/RUN-2026-014 v1",
+    "payload": { "version": 1, "data_ref": "lcms://raw/RUN-2026-014", "hash": "sha256:9f2c…", "instrument": "LC-MS/MS-02" }
+  },
+  {
+    "event_id": "hq-0008",
+    "event_type": "ANALYSIS_VERSIONED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-014",
+    "occurred_at": "2026-06-16T09:00:00+08:00",
+    "version": 3,
+    "summary": "分析结果留版：analysis://RUN-2026-014/quant v1",
+    "payload": { "version": 1, "analysis_ref": "analysis://RUN-2026-014/quant", "software": "MS-DIAL 4.9" }
+  },
+  {
+    "event_id": "hq-0009",
+    "event_type": "INTERPRETATION_VERSIONED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-014",
+    "occurred_at": "2026-06-17T10:00:00+08:00",
+    "version": 4,
+    "summary": "解释留版：interp://RUN-2026-014/note v1",
+    "payload": { "version": 1, "interpretation_ref": "interp://RUN-2026-014/note", "author": "李某", "note": "AmAS 过表达株黄芪甲苷显著升高" }
+  },
+  {
+    "event_id": "hq-0010",
+    "event_type": "CLAIM_REGISTERED",
+    "aggregate_type": "research_claim",
+    "aggregate_id": "CLM-ASG-01",
+    "occurred_at": "2026-06-20T15:00:00+08:00",
+    "version": 1,
+    "summary": "主张登记：CLM-ASG-01",
+    "payload": {
+      "statement": "AmAS 过表达使黄芪毛状根黄芪甲苷产量提升约 2.3 倍",
+      "team": "代谢组",
+      "material_ids": ["HQ-OE-AS"],
+      "run_ids": ["RUN-2026-014"],
+      "parameter_refs": ["培养天数", "接种量_g"],
+      "observation_refs": ["lcms://raw/RUN-2026-014"]
+    }
+  }
+]

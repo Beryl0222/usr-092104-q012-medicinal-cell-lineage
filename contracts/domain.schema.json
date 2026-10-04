@@ -21,9 +21,22 @@
       "enum": [
         "MATERIAL_ACCESSIONED",
         "PASSAGE_RECORDED",
+        "ALIQUOT_CREATED",
+        "CONSTRUCT_INTRODUCED",
+        "CONTAMINATION_CHECK_RECORDED",
+        "BRANCH_FROZEN",
+        "BRANCH_RELEASED",
+        "MATERIAL_DISCARDED",
         "RUN_COMPLETED",
+        "RAW_DATA_REGISTERED",
+        "ANALYSIS_VERSIONED",
+        "INTERPRETATION_VERSIONED",
         "CLAIM_REGISTERED",
-        "TRANSFER_APPROVED"
+        "TRANSFER_APPROVED",
+        "TRANSFER_WITHDRAWN",
+        "PERSONNEL_AUTHORIZED",
+        "PERSONNEL_AUTHORIZATION_REVOKED",
+        "PERSONNEL_OFFBOARDED"
       ]
     },
     "aggregate_type": {
@@ -32,7 +45,9 @@
         "biological_material",
         "culture_passage",
         "experiment_run",
-        "research_claim"
+        "research_claim",
+        "transfer_agreement",
+        "personnel"
       ]
     },
     "aggregate_id": {
@@ -50,6 +65,9 @@
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "payload": {
+      "type": "object"
     }
   },
   "additionalProperties": true
