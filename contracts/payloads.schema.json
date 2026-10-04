@@ -1,0 +1,341 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lineage.example/contracts/payloads.schema.json",
+  "title": "中药细胞株科研谱系事件载荷",
+  "description": "按 event_type 索引的载荷定义。校验器取 #/$defs/<event_type> 校验信封内 payload。",
+  "$defs": {
+    "terms": {
+      "type": "object",
+      "description": "材料转移四要素：用途、期限、署名、再分发限制。",
+      "required": ["intended_use", "valid_until", "attribution", "redistribution"],
+      "properties": {
+        "intended_use": { "type": "string", "minLength": 1, "description": "核定用途" },
+        "valid_until": { "type": "string", "format": "date", "description": "使用期限截止日" },
+        "attribution": { "type": "string", "minLength": 1, "description": "署名与来源标注要求" },
+        "redistribution": {
+          "type": "string",
+          "enum": ["prohibited", "allowed_with_written_consent"],
+          "description": "再分发限制"
+        },
+        "extra_restrictions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "content_hash": {
+      "type": "object",
+      "required": ["alg", "value"],
+      "properties": {
+        "alg": { "type": "string", "enum": ["sha256", "sha512"] },
+        "value": { "type": "string", "minLength": 8 }
+      }
+    },
+    "MATERIAL_ACCESSIONED": {
+      "type": "object",
+      "required": ["material_id", "kind", "species", "custodian_lab"],
+      "properties": {
+        "material_id": { "type": "string", "minLength": 1 },
+        "kind": {
+          "type": "string",
+          "enum": ["explant", "hairy_root_root_line", "passage_line", "transformed_line", "aliquot_vial", "pool"]
+        },
+        "species": { "type": "string", "minLength": 1, "description": "物种，如 Astragalus membranaceus var. mongholicus" },
+        "strain_designation": { "type": "string", "description": "株系命名/俗称，如 胡氏细胞株" },
+        "origin_description": { "type": "string" },
+        "parent_material_ids": { "type": "array", "items": { "type": "string" } },
+        "storage_location": { "type": "string" },
+        "custodian_lab": { "type": "string", "minLength": 1 },
+        "initial_status": { "type": "string", "enum": ["available", "in_culture", "depleted", "destroyed"] },
+        "attributes": { "type": "object" }
+      }
+    },
+    "PASSAGE_RECORDED": {
+      "type": "object",
+      "required": ["passage_id", "parent_material_id", "child_material_id", "passage_no", "operator_id"],
+      "properties": {
+        "passage_id": { "type": "string", "minLength": 1 },
+        "parent_material_id": { "type": "string", "minLength": 1 },
+        "child_material_id": { "type": "string", "minLength": 1 },
+        "passage_no": { "type": "integer", "minimum": 1 },
+        "medium": { "type": "string" },
+        "conditions": { "type": "object", "description": "温度、光周期、激素等培养条件" },
+        "duration_days": { "type": "integer", "minimum": 0 },
+        "operator_id": { "type": "string", "minLength": 1 },
+        "paper_note_ref": { "type": "string", "description": "纸质笔记卷页出处" }
+      }
+    },
+    "MATERIAL_ALIQUOTED": {
+      "type": "object",
+      "required": ["parent_material_id", "children", "operator_id"],
+      "properties": {
+        "parent_material_id": { "type": "string", "minLength": 1 },
+        "operator_id": { "type": "string", "minLength": 1 },
+        "children": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["material_id", "vial_label"],
+            "properties": {
+              "material_id": { "type": "string", "minLength": 1 },
+              "vial_label": { "type": "string", "minLength": 1, "description": "冻存管标签原文" },
+              "storage_location": { "type": "string" },
+              "volume_ml": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "MATERIAL_POOLED": {
+      "type": "object",
+      "required": ["pool_material_id", "source_material_ids", "operator_id"],
+      "properties": {
+        "pool_material_id": { "type": "string", "minLength": 1 },
+        "source_material_ids": { "type": "array", "minItems": 2, "items": { "type": "string" } },
+        "ratio_note": { "type": "string" },
+        "operator_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "CONSTRUCT_INTRODUCED": {
+      "type": "object",
+      "required": ["construct_id", "construct_name", "host_material_id", "resulting_material_id", "operator_id"],
+      "properties": {
+        "construct_id": { "type": "string", "minLength": 1 },
+        "construct_name": { "type": "string", "minLength": 1, "description": "如 Ri 质粒 / AmCAS 过表达构建" },
+        "vector": { "type": "string" },
+        "delivery_method": { "type": "string", "description": "如 Agrobacterium rhizogenes C58C1 转化" },
+        "selection_marker": { "type": "string" },
+        "host_material_id": { "type": "string", "minLength": 1 },
+        "resulting_material_id": { "type": "string", "minLength": 1 },
+        "resulting_strain_designation": { "type": "string", "description": "新株系命名；新株系不沿用宿主株系名" },
+        "verification": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string" },
+            "result": { "type": "string", "enum": ["positive", "negative", "inconclusive"] },
+            "artifact_ids": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "operator_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "QC_PERFORMED": {
+      "type": "object",
+      "required": ["material_id", "qc_type", "result", "operator_id"],
+      "properties": {
+        "material_id": { "type": "string", "minLength": 1 },
+        "qc_type": {
+          "type": "string",
+          "enum": [
+            "bacterial_contamination",
+            "fungal_contamination",
+            "mycoplasma",
+            "identity_marker",
+            "viability",
+            "authenticity",
+            "transgene_pcr",
+            "content_assay",
+            "other"
+          ]
+        },
+        "result": { "type": "string", "enum": ["passed", "failed", "inconclusive"] },
+        "method": { "type": "string" },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "artifact_ids": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" },
+        "operator_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "LINEAGE_QUARANTINED": {
+      "type": "object",
+      "required": ["subtree_root_material_id", "reason"],
+      "properties": {
+        "subtree_root_material_id": { "type": "string", "minLength": 1, "description": "仅冻结该材料及其后代支系，不影响旁支" },
+        "reason": { "type": "string", "enum": ["contamination", "label_dispute", "suspect_pool", "other"] },
+        "related_event_ids": { "type": "array", "items": { "type": "string" } },
+        "note": { "type": "string" }
+      }
+    },
+    "LINEAGE_RELEASED": {
+      "type": "object",
+      "required": ["subtree_root_material_id", "reason"],
+      "properties": {
+        "subtree_root_material_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string" },
+        "related_event_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "LABEL_DISPUTE_FILED": {
+      "type": "object",
+      "required": ["dispute_id", "material_ids", "description", "filed_by"],
+      "properties": {
+        "dispute_id": { "type": "string", "minLength": 1 },
+        "material_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "description": { "type": "string", "minLength": 1 },
+        "evidence_artifact_ids": { "type": "array", "items": { "type": "string" } },
+        "filed_by": { "type": "string", "minLength": 1 }
+      }
+    },
+    "LABEL_DISPUTE_RESOLVED": {
+      "type": "object",
+      "required": ["dispute_id", "resolution"],
+      "properties": {
+        "dispute_id": { "type": "string", "minLength": 1 },
+        "resolution": { "type": "string", "enum": ["identity_upheld", "identity_corrected"] },
+        "corrected_material_id": { "type": "string", "description": "身份纠正后的材料编号" },
+        "note": { "type": "string" }
+      }
+    },
+    "RUN_COMPLETED": {
+      "type": "object",
+      "required": ["run_id", "protocol_id", "materials_used", "parameters", "outcome", "operator_id"],
+      "properties": {
+        "run_id": { "type": "string", "minLength": 1 },
+        "protocol_id": { "type": "string", "minLength": 1 },
+        "protocol_name": { "type": "string" },
+        "materials_used": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["material_id"],
+            "properties": {
+              "material_id": { "type": "string", "minLength": 1 },
+              "role": { "type": "string" }
+            }
+          }
+        },
+        "parameters": { "type": "object", "description": "仪器与培养参数键值，原样保留" },
+        "instrument_ids": { "type": "array", "items": { "type": "string" } },
+        "outcome": { "type": "string", "enum": ["success", "failure", "inconclusive"] },
+        "failure_category": { "type": "string" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "completed_at": { "type": "string", "format": "date-time" },
+        "operator_id": { "type": "string", "minLength": 1 },
+        "retained": { "type": "boolean", "description": "失败/阴性实验按保留规则留存且可检索" },
+        "raw_artifact_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "ARTIFACT_VERSIONED": {
+      "type": "object",
+      "required": ["artifact_id", "version_no", "layer", "name", "content_hash"],
+      "properties": {
+        "artifact_id": { "type": "string", "minLength": 1, "description": "逻辑文件稳定标识，版本迭代不变" },
+        "version_no": { "type": "integer", "minimum": 1 },
+        "layer": { "type": "string", "enum": ["raw_observation", "analysis", "interpretation"] },
+        "name": { "type": "string", "minLength": 1 },
+        "storage_uri": { "type": "string" },
+        "content_hash": { "$ref": "#/$defs/content_hash" },
+        "parent_artifact_refs": {
+          "type": "array",
+          "description": "溯源边：分析引用原始观测，解释引用分析结果",
+          "items": {
+            "type": "object",
+            "required": ["artifact_id", "version_no"],
+            "properties": {
+              "artifact_id": { "type": "string", "minLength": 1 },
+              "version_no": { "type": "integer", "minimum": 1 }
+            }
+          }
+        },
+        "run_id": { "type": "string" },
+        "instrument_id": { "type": "string" },
+        "recorded_by": { "type": "string" },
+        "note": { "type": "string" }
+      }
+    },
+    "CLAIM_REGISTERED": {
+      "type": "object",
+      "required": ["claim_id", "statement", "supporting_run_ids", "supporting_artifact_ids"],
+      "properties": {
+        "claim_id": { "type": "string", "minLength": 1 },
+        "statement": { "type": "string", "minLength": 1 },
+        "supporting_run_ids": { "type": "array", "items": { "type": "string" } },
+        "supporting_artifact_ids": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["artifact_id", "version_no"],
+            "properties": {
+              "artifact_id": { "type": "string", "minLength": 1 },
+              "version_no": { "type": "integer", "minimum": 1 }
+            }
+          }
+        },
+        "materials_referenced": { "type": "array", "items": { "type": "string" } },
+        "registered_by": { "type": "string" },
+        "published_in": { "type": "string" }
+      }
+    },
+    "CLAIM_WITHDRAWN": {
+      "type": "object",
+      "required": ["claim_id", "reason", "withdrawn_by"],
+      "properties": {
+        "claim_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "withdrawn_by": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "TRANSFER_APPROVED": {
+      "type": "object",
+      "required": ["transfer_id", "material_ids", "from_lab", "to_lab", "terms", "approver_id"],
+      "properties": {
+        "transfer_id": { "type": "string", "minLength": 1 },
+        "material_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "from_lab": { "type": "string", "minLength": 1 },
+        "to_lab": { "type": "string", "minLength": 1 },
+        "terms": { "$ref": "#/$defs/terms" },
+        "approver_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "MATERIAL_SHIPPED": {
+      "type": "object",
+      "required": ["transfer_id", "material_ids", "shipped_at"],
+      "properties": {
+        "transfer_id": { "type": "string", "minLength": 1 },
+        "material_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "shipped_at": { "type": "string", "format": "date-time" },
+        "carrier": { "type": "string" }
+      }
+    },
+    "MATERIAL_RECEIVED": {
+      "type": "object",
+      "required": ["transfer_id", "material_ids", "received_at", "receiver_id"],
+      "properties": {
+        "transfer_id": { "type": "string", "minLength": 1 },
+        "material_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "received_at": { "type": "string", "format": "date-time" },
+        "receiver_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "PERSONNEL_DEPARTURE_CHECKED": {
+      "type": "object",
+      "required": ["person_id", "data_access_revoked_at", "materials_returned", "artifacts_checked", "clearance", "checker_id"],
+      "properties": {
+        "person_id": { "type": "string", "minLength": 1 },
+        "departure_date": { "type": "string", "format": "date" },
+        "data_access_revoked_at": { "type": "string", "format": "date-time" },
+        "materials_returned": { "type": "array", "items": { "type": "string" } },
+        "artifacts_checked": { "type": "array", "items": { "type": "string" } },
+        "unauthorized_removals": { "type": "array", "items": { "type": "string" }, "description": "发现的未授权带走尝试，非空则不得放行" },
+        "clearance": { "type": "string", "enum": ["granted", "denied"] },
+        "checker_id": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    },
+    "RETENTION_POLICY_DECLARED": {
+      "type": "object",
+      "required": ["policy_id", "applies_to_outcomes", "retain_years", "searchable", "declared_by"],
+      "properties": {
+        "policy_id": { "type": "string", "minLength": 1 },
+        "applies_to_outcomes": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["success", "failure", "inconclusive"] }
+        },
+        "retain_years": { "type": "integer", "minimum": 1 },
+        "searchable": { "type": "boolean", "description": "保留期内失败实验仍可检索" },
+        "declared_by": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,9 +1,12 @@
 {
   "name": "medicinal-cell-lineage",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "领域事件基础校验",
+  "description": "中药细胞株科研谱系：事件信封、谱系/证据/合规服务与校验",
+  "bin": {
+    "cell-lineage": "src/cli.js"
+  },
   "scripts": {
     "test": "node --test"
   }

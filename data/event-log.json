@@ -1,0 +1,834 @@
+[
+  {
+    "event_id": "EVT-001",
+    "event_type": "RETENTION_POLICY_DECLARED",
+    "aggregate_type": "retention_policy",
+    "aggregate_id": "RET-FAIL-10Y",
+    "occurred_at": "2026-01-06T09:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "宣布失败与无定论实验保留十年且保留期内可检索",
+    "payload": {
+      "policy_id": "RET-FAIL-10Y",
+      "applies_to_outcomes": ["failure", "inconclusive"],
+      "retain_years": 10,
+      "searchable": true,
+      "declared_by": "HU-JIAOSHOU",
+      "note": "阴性结果与仪器故障批次同样留档，禁止删除或藏匿"
+    }
+  },
+  {
+    "event_id": "EVT-002",
+    "event_type": "MATERIAL_ACCESSIONED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-EX-000",
+    "occurred_at": "2018-03-12T10:30:00+08:00",
+    "recorded_at": "2026-01-15T14:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "source_note": "纸质实验册 NB-HU-2018 第3页，2026-01-15 由 H02 转录",
+    "summary": "登记内蒙古武川采回的蒙古黄芪外植体（胡氏细胞株共同祖先）",
+    "payload": {
+      "material_id": "MAT-EX-000",
+      "kind": "explant",
+      "species": "Astragalus membranaceus var. mongholicus",
+      "strain_designation": "胡氏外植体-武川2018",
+      "origin_description": "内蒙古武川县大田二年生蒙古黄芪茎段，采株号 WC-2018-017",
+      "storage_location": "组培室 A 架",
+      "custodian_lab": "LAB-A",
+      "initial_status": "in_culture",
+      "attributes": { "collector": "HU-JIAOSHOU", "field_voucher": "WC-2018-017" }
+    }
+  },
+  {
+    "event_id": "EVT-003",
+    "event_type": "CONSTRUCT_INTRODUCED",
+    "aggregate_type": "gene_construct",
+    "aggregate_id": "CN-RI-C58C1",
+    "occurred_at": "2018-04-02T16:20:00+08:00",
+    "recorded_at": "2026-01-15T14:05:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "source_note": "纸质实验册 NB-HU-2018 第18页",
+    "summary": "发根农杆菌 C58C1（Ri 质粒）诱导获得毛状根初代株系 HR-01",
+    "payload": {
+      "construct_id": "CN-RI-C58C1",
+      "construct_name": "Ri 质粒（野生型发根农杆菌 C58C1）",
+      "vector": "Ri plasmid pRiA4",
+      "delivery_method": "茎段针刺共培养诱导毛状根",
+      "host_material_id": "MAT-EX-000",
+      "resulting_material_id": "MAT-HR-01",
+      "verification": {
+        "method": "rolB/rolC PCR 与形态学（无向地性、多分支）",
+        "result": "positive",
+        "artifact_ids": ["ART-RI-GEL-2018"]
+      },
+      "operator_id": "HU-JIAOSHOU"
+    }
+  },
+  {
+    "event_id": "EVT-004",
+    "event_type": "MATERIAL_ACCESSIONED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-HR-01",
+    "occurred_at": "2018-04-02T16:25:00+08:00",
+    "recorded_at": "2026-01-15T14:05:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "source_note": "由 EVT-003 补登记；纸质实验册 NB-HU-2018 第18页",
+    "summary": "毛状根初代株系 HR-01 建档，即后续所称胡氏细胞株",
+    "payload": {
+      "material_id": "MAT-HR-01",
+      "kind": "hairy_root_root_line",
+      "species": "Astragalus membranaceus var. mongholicus",
+      "strain_designation": "胡氏细胞株 HR-01",
+      "origin_description": "WC-2018-017 外植体经 C58C1 诱导的单根克隆系",
+      "parent_material_ids": ["MAT-EX-000"],
+      "storage_location": "摇床间 R1",
+      "custodian_lab": "LAB-A",
+      "initial_status": "in_culture"
+    }
+  },
+  {
+    "event_id": "EVT-005",
+    "event_type": "PASSAGE_RECORDED",
+    "aggregate_type": "culture_passage",
+    "aggregate_id": "PASS-2018-05",
+    "occurred_at": "2018-05-10T09:00:00+08:00",
+    "recorded_at": "2026-01-15T14:10:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "source_note": "纸质实验册 NB-HU-2018 第33页",
+    "summary": "HR-01 第 5 代传代培养",
+    "payload": {
+      "passage_id": "PASS-2018-05",
+      "parent_material_id": "MAT-HR-01",
+      "child_material_id": "MAT-HR-01-P05",
+      "passage_no": 5,
+      "medium": "1/2 MS + 30 g/L 蔗糖，无激素",
+      "conditions": { "temperature_c": 25, "photoperiod": "dark", "shaker_rpm": 110 },
+      "duration_days": 21,
+      "operator_id": "HU-JIAOSHOU",
+      "paper_note_ref": "NB-HU-2018:33"
+    }
+  },
+  {
+    "event_id": "EVT-006",
+    "event_type": "PASSAGE_RECORDED",
+    "aggregate_type": "culture_passage",
+    "aggregate_id": "PASS-2018-09",
+    "occurred_at": "2018-09-14T09:30:00+08:00",
+    "recorded_at": "2026-01-15T14:12:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "source_note": "纸质实验册 NB-HU-2018 第71页",
+    "summary": "HR-01 第 12 代传代培养，作为后续转化受体与对照母系",
+    "payload": {
+      "passage_id": "PASS-2018-09",
+      "parent_material_id": "MAT-HR-01-P05",
+      "child_material_id": "MAT-HR-01-P12",
+      "passage_no": 12,
+      "medium": "1/2 MS + 30 g/L 蔗糖，无激素",
+      "conditions": { "temperature_c": 25, "photoperiod": "dark", "shaker_rpm": 110 },
+      "duration_days": 18,
+      "operator_id": "HU-JIAOSHOU",
+      "paper_note_ref": "NB-HU-2018:71"
+    }
+  },
+  {
+    "event_id": "EVT-007",
+    "event_type": "CONSTRUCT_INTRODUCED",
+    "aggregate_type": "gene_construct",
+    "aggregate_id": "CN-AMCAS",
+    "occurred_at": "2025-11-03T15:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "在 P12 毛状根中引入 AmCAS 过表达构建，获得转化株 MAT-AMCAS-01",
+    "payload": {
+      "construct_id": "CN-AMCAS",
+      "construct_name": "AmCAS 过表达构建 pBI121-AmCAS",
+      "vector": "pBI121（CaMV 35S 启动子）",
+      "delivery_method": "农杆菌 C58C1 介导转化毛状根切段",
+      "selection_marker": "卡那霉素 50 mg/L",
+      "host_material_id": "MAT-HR-01-P12",
+      "resulting_material_id": "MAT-AMCAS-01",
+      "resulting_strain_designation": "胡氏细胞株 AmCAS-01",
+      "verification": {
+        "method": "AmCAS 整合 PCR + qRT-PCR 表达量",
+        "result": "positive",
+        "artifact_ids": ["ART-PCRCAS-GEL-2025"]
+      },
+      "operator_id": "H02"
+    }
+  },
+  {
+    "event_id": "EVT-008",
+    "event_type": "MATERIAL_ALIQUOTED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-AMCAS-01",
+    "occurred_at": "2025-11-20T11:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "AmCAS 转化株扩繁后分装三支冻存管 A/B/C",
+    "payload": {
+      "parent_material_id": "MAT-AMCAS-01",
+      "operator_id": "H02",
+      "children": [
+        { "material_id": "V-AMCAS-01-A", "vial_label": "胡氏-AmCAS-01-A", "storage_location": "液氮罐 LN2-A3 盒12 位1", "volume_ml": 1.8 },
+        { "material_id": "V-AMCAS-01-B", "vial_label": "胡氏-AmCAS-01-B", "storage_location": "液氮罐 LN2-A3 盒12 位2", "volume_ml": 1.8 },
+        { "material_id": "V-AMCAS-01-C", "vial_label": "胡氏-AmCAS-01-C", "storage_location": "液氮罐 LN2-A3 盒12 位3", "volume_ml": 1.8 }
+      ]
+    }
+  },
+  {
+    "event_id": "EVT-009",
+    "event_type": "MATERIAL_ALIQUOTED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-HR-01-P12",
+    "occurred_at": "2025-11-20T11:20:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "未转化对照母系 P12 分装两支冻存管",
+    "payload": {
+      "parent_material_id": "MAT-HR-01-P12",
+      "operator_id": "H02",
+      "children": [
+        { "material_id": "V-HR-01-A", "vial_label": "胡氏-HR01-对照-A", "storage_location": "液氮罐 LN2-A3 盒14 位1", "volume_ml": 1.8 },
+        { "material_id": "V-HR-01-B", "vial_label": "胡氏-HR01-对照-B", "storage_location": "液氮罐 LN2-A3 盒14 位2", "volume_ml": 1.8 }
+      ]
+    }
+  },
+  {
+    "event_id": "EVT-010",
+    "event_type": "PASSAGE_RECORDED",
+    "aggregate_type": "culture_passage",
+    "aggregate_id": "PASS-2025-12-B",
+    "occurred_at": "2025-12-02T10:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "复苏冻存管 B 并传代培养为 B-P13 恢复系",
+    "payload": {
+      "passage_id": "PASS-2025-12-B",
+      "parent_material_id": "V-AMCAS-01-B",
+      "child_material_id": "MAT-HR-01-B-P13",
+      "passage_no": 13,
+      "medium": "1/2 MS + 30 g/L 蔗糖",
+      "conditions": { "temperature_c": 25, "photoperiod": "dark", "shaker_rpm": 110 },
+      "duration_days": 14,
+      "operator_id": "H02"
+    }
+  },
+  {
+    "event_id": "EVT-011",
+    "event_type": "QC_PERFORMED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "V-AMCAS-01-B",
+    "occurred_at": "2026-01-08T09:40:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "B 管复苏培养物细菌污染检查不合格",
+    "payload": {
+      "material_id": "V-AMCAS-01-B",
+      "qc_type": "bacterial_contamination",
+      "result": "failed",
+      "method": "LB 划线 + 革兰氏染色镜检",
+      "observed_at": "2026-01-07T17:00:00+08:00",
+      "notes": "培养基浑浊、镜检见杆状菌，判定复苏环节污染",
+      "operator_id": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-012",
+    "event_type": "LINEAGE_QUARANTINED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "V-AMCAS-01-B",
+    "occurred_at": "2026-01-08T10:00:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "仅冻结 B 管及其后代 B-P13，A/C 旁支不受影响",
+    "payload": {
+      "subtree_root_material_id": "V-AMCAS-01-B",
+      "reason": "contamination",
+      "related_event_ids": ["EVT-011"],
+      "note": "污染支系暂停一切领用与转出，待灭菌销毁评估"
+    }
+  },
+  {
+    "event_id": "EVT-013",
+    "event_type": "QC_PERFORMED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "V-AMCAS-01-A",
+    "occurred_at": "2026-01-09T09:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "A 管转基因身份 PCR 合格",
+    "payload": {
+      "material_id": "V-AMCAS-01-A",
+      "qc_type": "transgene_pcr",
+      "result": "passed",
+      "method": "AmCAS/NPTII 双重 PCR",
+      "notes": "双目标条带均阳性，与 B/C 同批但独立复苏体系",
+      "operator_id": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-014",
+    "event_type": "QC_PERFORMED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "V-AMCAS-01-C",
+    "occurred_at": "2026-01-09T09:20:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "C 管复苏活力检查合格",
+    "payload": {
+      "material_id": "V-AMCAS-01-C",
+      "qc_type": "viability",
+      "result": "passed",
+      "method": "TTC 活力染色",
+      "operator_id": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-015",
+    "event_type": "MATERIAL_POOLED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-POOL-09",
+    "occurred_at": "2026-01-20T14:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "等鲜重混合 C 管转化株与对照 A 管，做探索性混样 POOL-09",
+    "payload": {
+      "pool_material_id": "MAT-POOL-09",
+      "source_material_ids": ["V-AMCAS-01-C", "V-HR-01-A"],
+      "ratio_note": "鲜重 1:1 混合，各 2.0 g",
+      "operator_id": "H02"
+    }
+  },
+  {
+    "event_id": "EVT-016",
+    "event_type": "LABEL_DISPUTE_FILED",
+    "aggregate_type": "label_dispute",
+    "aggregate_id": "DSP-2026-001",
+    "occurred_at": "2026-01-22T11:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "冻存盒整理时质疑混样所用对照 A 管标签可能与 HR-02 系混淆",
+    "payload": {
+      "dispute_id": "DSP-2026-001",
+      "material_ids": ["V-HR-01-A", "MAT-POOL-09"],
+      "description": "盒14 位1 标签字迹与邻盒 HR-02 批次相似，混样 POOL-09 来源存疑",
+      "evidence_artifact_ids": ["ART-LABEL-PHOTO-01"],
+      "filed_by": "H02"
+    }
+  },
+  {
+    "event_id": "EVT-017",
+    "event_type": "LINEAGE_QUARANTINED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-POOL-09",
+    "occurred_at": "2026-01-22T11:30:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "标签争议期间仅冻结混样 POOL-09 支系，上游两管及其余后代不动",
+    "payload": {
+      "subtree_root_material_id": "MAT-POOL-09",
+      "reason": "label_dispute",
+      "related_event_ids": ["EVT-016"],
+      "note": "等待 SSR 身份比对结果"
+    }
+  },
+  {
+    "event_id": "EVT-018",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-SSR-RAW",
+    "occurred_at": "2026-01-26T18:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "V-HR-01-A 与 HR-01/HR-02 参考株 SSR 毛细管电泳原始数据留版",
+    "payload": {
+      "artifact_id": "ART-SSR-RAW",
+      "version_no": 1,
+      "layer": "raw_observation",
+      "name": "SSR-6位点毛细管电泳原始峰图.fsa.zip",
+      "storage_uri": "nas://lab-a/identity/2026/ART-SSR-RAW-v1.fsa.zip",
+      "content_hash": { "alg": "sha256", "value": "9f2c1a7e4b6d8f0a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b0d2f4a6c8e0b1d3f5a" },
+      "instrument_id": "SEQ-CAPILLARY-01",
+      "recorded_by": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-019",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-SSR-CALL",
+    "occurred_at": "2026-01-27T10:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "SSR 位点判型分析：V-HR-01-A 与 HR-01 参考全位点一致",
+    "payload": {
+      "artifact_id": "ART-SSR-CALL",
+      "version_no": 1,
+      "layer": "analysis",
+      "name": "SSR 判型比对表.xlsx",
+      "storage_uri": "nas://lab-a/identity/2026/ART-SSR-CALL-v1.xlsx",
+      "content_hash": { "alg": "sha256", "value": "1a3c5e7b9d1f3a5c7e9b0d2f4a6c8e0b1d3f5a7c9e0b2d4f6a8c0e1b3d5f7a9c" },
+      "parent_artifact_refs": [{ "artifact_id": "ART-SSR-RAW", "version_no": 1 }],
+      "recorded_by": "A10",
+      "note": "6 个位点与 HR-01 参考株全部一致，与 HR-02 在 2 个位点不同"
+    }
+  },
+  {
+    "event_id": "EVT-020",
+    "event_type": "QC_PERFORMED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "V-HR-01-A",
+    "occurred_at": "2026-01-27T10:30:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "对照 A 管 SSR 身份鉴定合格，确为 HR-01 后代",
+    "payload": {
+      "material_id": "V-HR-01-A",
+      "qc_type": "identity_marker",
+      "result": "passed",
+      "method": "6 位点 SSR 毛细管电泳比对",
+      "artifact_ids": ["ART-SSR-RAW", "ART-SSR-CALL"],
+      "operator_id": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-021",
+    "event_type": "LABEL_DISPUTE_RESOLVED",
+    "aggregate_type": "label_dispute",
+    "aggregate_id": "DSP-2026-001",
+    "occurred_at": "2026-01-28T09:00:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "标签争议裁定：原身份成立，混样来源确为 HR-01 对照",
+    "payload": {
+      "dispute_id": "DSP-2026-001",
+      "resolution": "identity_upheld",
+      "note": "SSR 证据支持标签；字迹问题系冻存笔晕染，补贴耐久标签"
+    }
+  },
+  {
+    "event_id": "EVT-022",
+    "event_type": "LINEAGE_RELEASED",
+    "aggregate_type": "biological_material",
+    "aggregate_id": "MAT-POOL-09",
+    "occurred_at": "2026-01-28T09:15:00+08:00",
+    "version": 3,
+    "lab_id": "LAB-A",
+    "summary": "身份确认后解除 POOL-09 支系冻结",
+    "payload": {
+      "subtree_root_material_id": "MAT-POOL-09",
+      "reason": "SSR 身份比对通过，标签争议 identity_upheld",
+      "related_event_ids": ["EVT-021", "EVT-019"]
+    }
+  },
+  {
+    "event_id": "EVT-023",
+    "event_type": "TRANSFER_APPROVED",
+    "aggregate_type": "material_transfer",
+    "aggregate_id": "TR-2026-007",
+    "occurred_at": "2026-02-05T15:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "批准向协作院校 LAB-C 转移 A、B 两支冻存管（B 实际处于冻结，待转出核对拦截）",
+    "payload": {
+      "transfer_id": "TR-2026-007",
+      "material_ids": ["V-AMCAS-01-A", "V-AMCAS-01-B"],
+      "from_lab": "LAB-A",
+      "to_lab": "LAB-C",
+      "terms": {
+        "intended_use": "仅限黄芪甲苷生物合成通路合作研究，禁止用于人体临床与商业化育种",
+        "valid_until": "2027-12-31",
+        "attribution": "论文与报告须注明材料来源于 LAB-A 胡氏细胞株 HR-01/AmCAS 谱系",
+        "redistribution": "prohibited",
+        "extra_restrictions": ["不得向第三方再分发，如需续展须重新书面申请"]
+      },
+      "approver_id": "HU-JIAOSHOU"
+    }
+  },
+  {
+    "event_id": "EVT-024",
+    "event_type": "MATERIAL_SHIPPED",
+    "aggregate_type": "material_transfer",
+    "aggregate_id": "TR-2026-007",
+    "occurred_at": "2026-02-10T08:30:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "转出核对发现 B 管属污染冻结支系，本单实际仅发运 A 管",
+    "payload": {
+      "transfer_id": "TR-2026-007",
+      "material_ids": ["V-AMCAS-01-A"],
+      "shipped_at": "2026-02-10T08:30:00+08:00",
+      "carrier": "顺丰冷运 SF-COLD-7781"
+    }
+  },
+  {
+    "event_id": "EVT-025",
+    "event_type": "MATERIAL_RECEIVED",
+    "aggregate_type": "material_transfer",
+    "aggregate_id": "TR-2026-007",
+    "occurred_at": "2026-02-12T10:10:00+08:00",
+    "version": 3,
+    "lab_id": "LAB-C",
+    "summary": "LAB-C 凭转移条款接收 A 管并登记为当前持有方",
+    "payload": {
+      "transfer_id": "TR-2026-007",
+      "material_ids": ["V-AMCAS-01-A"],
+      "received_at": "2026-02-12T10:10:00+08:00",
+      "receiver_id": "R20"
+    }
+  },
+  {
+    "event_id": "EVT-026",
+    "event_type": "RUN_COMPLETED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-002",
+    "occurred_at": "2026-03-18T20:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "摇床温控故障批次：培养失败，按保留规则完整留存",
+    "payload": {
+      "run_id": "RUN-2026-002",
+      "protocol_id": "PR-SHAKE-CULTURE-02",
+      "protocol_name": "毛状根悬浮扩大培养",
+      "materials_used": [{ "material_id": "MAT-AMCAS-01", "role": "test_line" }],
+      "parameters": {
+        "shaker_id": "SHAKER-05",
+        "set_temperature_c": 25,
+        "actual_temperature_c": "31-33（故障持续约14小时）",
+        "medium": "1/2 MS + 30 g/L 蔗糖",
+        "inoculum_g": 3.0
+      },
+      "instrument_ids": ["SHAKER-05"],
+      "outcome": "failure",
+      "failure_category": "equipment_temperature_failure",
+      "started_at": "2026-03-16T09:00:00+08:00",
+      "completed_at": "2026-03-18T20:00:00+08:00",
+      "operator_id": "H02",
+      "retained": true,
+      "raw_artifact_ids": ["ART-INCUBATOR-LOG"]
+    }
+  },
+  {
+    "event_id": "EVT-027",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-INCUBATOR-LOG",
+    "occurred_at": "2026-03-18T20:10:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "失败批次的摇床温控原始记录留版（失败实验原始观测同样保留）",
+    "payload": {
+      "artifact_id": "ART-INCUBATOR-LOG",
+      "version_no": 1,
+      "layer": "raw_observation",
+      "name": "SHAKER-05 温控曲线 2026-03-16_18.csv",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-002/ART-INCUBATOR-LOG-v1.csv",
+      "content_hash": { "alg": "sha256", "value": "c0e1b3d5f7a9c0e2b4d6f8a0c1e3b5d7f9a0c2e4b6d8f0a1c3e5b7d9f0a2c4e" },
+      "instrument_id": "SHAKER-05",
+      "run_id": "RUN-2026-002",
+      "recorded_by": "H02"
+    }
+  },
+  {
+    "event_id": "EVT-028",
+    "event_type": "RUN_COMPLETED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-2026-001",
+    "occurred_at": "2026-03-25T19:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "HPLC-ELSD 测定 AmCAS 株黄芪甲苷 IV 含量（成功批次）",
+    "payload": {
+      "run_id": "RUN-2026-001",
+      "protocol_id": "PR-CONTENT-HPLC-01",
+      "protocol_name": "毛状根黄芪甲苷 IV 含量 HPLC-ELSD 测定",
+      "materials_used": [
+        { "material_id": "MAT-AMCAS-01", "role": "test_line" },
+        { "material_id": "MAT-HR-01-P12", "role": "untransformed_control" }
+      ],
+      "parameters": {
+        "instrument_model": "Agilent 1260 + ELSD",
+        "column": "ZORBAX SB-C18 4.6x250 mm",
+        "mobile_phase": "乙腈:水=32:68",
+        "flow_ml_min": 1.0,
+        "column_temp_c": 30,
+        "elsd_drift_tube_c": 80,
+        "culture_days": 21,
+        "astragaloside_IV_mg_per_g_DW_test": 3.21,
+        "astragaloside_IV_mg_per_g_DW_control": 1.33
+      },
+      "instrument_ids": ["HPLC-02"],
+      "outcome": "success",
+      "started_at": "2026-03-25T08:30:00+08:00",
+      "completed_at": "2026-03-25T19:00:00+08:00",
+      "operator_id": "A10",
+      "retained": true,
+      "raw_artifact_ids": ["ART-HPLC-001"]
+    }
+  },
+  {
+    "event_id": "EVT-029",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-HPLC-001",
+    "occurred_at": "2026-03-25T19:30:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "HPLC-ELSD 原始色谱与进样序列留版",
+    "payload": {
+      "artifact_id": "ART-HPLC-001",
+      "version_no": 1,
+      "layer": "raw_observation",
+      "name": "20260325-AmCAS-astIV-原始色谱.cdf 与序列表.zip",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-001/ART-HPLC-001-v1.zip",
+      "content_hash": { "alg": "sha256", "value": "e5b7d9f1a3c5e7b9d1f3a5c7e9b0d2f4a6c8e0b2d4f6a8c0e2b4d6f8a0c2e4b6" },
+      "instrument_id": "HPLC-02",
+      "run_id": "RUN-2026-001",
+      "recorded_by": "A10"
+    }
+  },
+  {
+    "event_id": "EVT-030",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-PEAK-001",
+    "occurred_at": "2026-03-27T11:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "峰面积定量结果第一版（后发现积分基线问题，被 v2 取代但不删除）",
+    "payload": {
+      "artifact_id": "ART-PEAK-001",
+      "version_no": 1,
+      "layer": "analysis",
+      "name": "黄芪甲苷峰面积定量结果 v1.csv",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-001/ART-PEAK-001-v1.csv",
+      "content_hash": { "alg": "sha256", "value": "a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e0b2d4f6a8c0e2b4d6f8a0c2" },
+      "parent_artifact_refs": [{ "artifact_id": "ART-HPLC-001", "version_no": 1 }],
+      "run_id": "RUN-2026-001",
+      "recorded_by": "A10",
+      "note": "v1 采用自动积分，批次间 RSD 报告为 4.2%"
+    }
+  },
+  {
+    "event_id": "EVT-031",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-MEMO-001",
+    "occurred_at": "2026-03-28T09:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "含量结论解释备忘录 v1：基于自动积分 v1 称提高约 2.4 倍",
+    "payload": {
+      "artifact_id": "ART-MEMO-001",
+      "version_no": 1,
+      "layer": "interpretation",
+      "name": "AmCAS 黄芪甲苷含量结论备忘录 v1.docx",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-001/ART-MEMO-001-v1.docx",
+      "content_hash": { "alg": "sha256", "value": "b2d4f6a8c0e2b4d6f8a0c1e3b5d7f9a0c2e4b6d8f0a1c3e5b7d9f1a3c5e7b9d1" },
+      "parent_artifact_refs": [{ "artifact_id": "ART-PEAK-001", "version_no": 1 }],
+      "run_id": "RUN-2026-001",
+      "recorded_by": "HU-JIAOSHOU",
+      "note": "v1 结论：AmCAS 株黄芪甲苷 IV 达 3.21 mg/g DW，约为对照 2.4 倍"
+    }
+  },
+  {
+    "event_id": "EVT-032",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-PEAK-001",
+    "occurred_at": "2026-04-02T15:00:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "峰面积定量结果 v2：改手动基线积分并校正对照峰，v1 保留不删",
+    "payload": {
+      "artifact_id": "ART-PEAK-001",
+      "version_no": 2,
+      "layer": "analysis",
+      "name": "黄芪甲苷峰面积定量结果 v2.csv",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-001/ART-PEAK-001-v2.csv",
+      "content_hash": { "alg": "sha256", "value": "c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e0b2d4f6a8c0e2b4d6f8a0c2e4" },
+      "parent_artifact_refs": [{ "artifact_id": "ART-HPLC-001", "version_no": 1 }],
+      "run_id": "RUN-2026-001",
+      "recorded_by": "A10",
+      "note": "v2 手动基线积分：测试株 2.62 mg/g DW、对照 1.30 mg/g DW，提高约 2.0 倍"
+    }
+  },
+  {
+    "event_id": "EVT-033",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-MEMO-001",
+    "occurred_at": "2026-04-03T09:30:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "解释备忘录 v2：按 v2 定量改为约 2.0 倍，v1 解释留版可追溯",
+    "payload": {
+      "artifact_id": "ART-MEMO-001",
+      "version_no": 2,
+      "layer": "interpretation",
+      "name": "AmCAS 黄芪甲苷含量结论备忘录 v2.docx",
+      "storage_uri": "nas://lab-a/runs/RUN-2026-001/ART-MEMO-001-v2.docx",
+      "content_hash": { "alg": "sha256", "value": "d4f6a8c0e2b4d6f8a0c2e4b6d8f0a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b0d2f4" },
+      "parent_artifact_refs": [{ "artifact_id": "ART-PEAK-001", "version_no": 2 }],
+      "run_id": "RUN-2026-001",
+      "recorded_by": "HU-JIAOSHOU",
+      "note": "v2 结论：提高约 2.0 倍；明确 v1 的 2.4 倍来自自动积分基线漂移"
+    }
+  },
+  {
+    "event_id": "EVT-034",
+    "event_type": "CLAIM_REGISTERED",
+    "aggregate_type": "research_claim",
+    "aggregate_id": "CLAIM-2026-HIGH-01",
+    "occurred_at": "2026-04-06T10:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "登记主张：AmCAS 转化株黄芪甲苷 IV 产量约为未转化对照 2.0 倍",
+    "payload": {
+      "claim_id": "CLAIM-2026-HIGH-01",
+      "statement": "在统一 21 天培养与 HPLC-ELSD 条件下，AmCAS 过表达毛状根黄芪甲苷 IV 含量 2.62 mg/g DW，约为同系未转化对照（1.30 mg/g DW）的 2.0 倍。",
+      "supporting_run_ids": ["RUN-2026-001"],
+      "supporting_artifact_ids": [
+        { "artifact_id": "ART-MEMO-001", "version_no": 2 },
+        { "artifact_id": "ART-PEAK-001", "version_no": 2 },
+        { "artifact_id": "ART-HPLC-001", "version_no": 1 }
+      ],
+      "materials_referenced": ["MAT-AMCAS-01", "MAT-HR-01-P12"],
+      "registered_by": "HU-JIAOSHOU",
+      "published_in": "Journal of Traditional Chinese Medicine Research 投稿稿 MS-2026-118"
+    }
+  },
+  {
+    "event_id": "EVT-035",
+    "event_type": "CLAIM_REGISTERED",
+    "aggregate_type": "research_claim",
+    "aggregate_id": "CLAIM-2026-SCALE-02",
+    "occurred_at": "2026-04-10T10:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "下游研究主张：建议以 AmCAS 株开展 20 L 反应器放大培养评估",
+    "payload": {
+      "claim_id": "CLAIM-2026-SCALE-02",
+      "statement": "基于 CLAIM-2026-HIGH-01 的含量优势，建议采用 MAT-AMCAS-01 作为 20 L 气升式反应器放大培养候选株。",
+      "supporting_run_ids": ["RUN-2026-001"],
+      "supporting_artifact_ids": [{ "artifact_id": "ART-MEMO-001", "version_no": 2 }],
+      "materials_referenced": ["MAT-AMCAS-01"],
+      "registered_by": "H02",
+      "published_in": "内部放大立项书 PROP-2026-07"
+    }
+  },
+  {
+    "event_id": "EVT-036",
+    "event_type": "RUN_COMPLETED",
+    "aggregate_type": "experiment_run",
+    "aggregate_id": "RUN-LABC-2026-003",
+    "occurred_at": "2026-05-22T18:30:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-C",
+    "summary": "LAB-C 用收到的 A 管按同一方案独立复测（跨团队复现）",
+    "payload": {
+      "run_id": "RUN-LABC-2026-003",
+      "protocol_id": "PR-CONTENT-HPLC-01",
+      "protocol_name": "毛状根黄芪甲苷 IV 含量 HPLC-ELSD 测定",
+      "materials_used": [{ "material_id": "V-AMCAS-01-A", "role": "test_line_received_from_LAB_A" }],
+      "parameters": {
+        "column": "ZORBAX SB-C18 4.6x250 mm",
+        "mobile_phase": "乙腈:水=32:68",
+        "flow_ml_min": 1.0,
+        "column_temp_c": 30,
+        "culture_days": 21,
+        "astragaloside_IV_mg_per_g_DW_test": 1.71
+      },
+      "instrument_ids": ["HPLC-C-04"],
+      "outcome": "success",
+      "started_at": "2026-05-20T09:00:00+08:00",
+      "completed_at": "2026-05-22T18:30:00+08:00",
+      "operator_id": "R20",
+      "retained": true,
+      "raw_artifact_ids": ["ART-HPLC-C-003"]
+    }
+  },
+  {
+    "event_id": "EVT-037",
+    "event_type": "ARTIFACT_VERSIONED",
+    "aggregate_type": "data_artifact",
+    "aggregate_id": "ART-HPLC-C-003",
+    "occurred_at": "2026-05-22T19:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-C",
+    "summary": "LAB-C 复测原始色谱留版，绝对值低于 LAB-A 报道",
+    "payload": {
+      "artifact_id": "ART-HPLC-C-003",
+      "version_no": 1,
+      "layer": "raw_observation",
+      "name": "20260522-LABC-AmCAS-astIV-原始色谱.zip",
+      "storage_uri": "nas://lab-c/repro/RUN-LABC-2026-003/ART-HPLC-C-003-v1.zip",
+      "content_hash": { "alg": "sha256", "value": "f7a9c1e3b5d7f9a0c2e4b6d8f0a1c3e5b7d9f1a3c5e7b9d0f2a4c6e8b0d1f3a5" },
+      "instrument_id": "HPLC-C-04",
+      "run_id": "RUN-LABC-2026-003",
+      "recorded_by": "R20"
+    }
+  },
+  {
+    "event_id": "EVT-038",
+    "event_type": "PERSONNEL_DEPARTURE_CHECKED",
+    "aggregate_type": "personnel_record",
+    "aggregate_id": "PER-H02",
+    "occurred_at": "2026-06-30T16:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "H02 离岗检查：U 盘检出未授权原始数据，拒绝放行",
+    "payload": {
+      "person_id": "H02",
+      "departure_date": "2026-07-01",
+      "data_access_revoked_at": "2026-06-30T15:00:00+08:00",
+      "materials_returned": ["MAT-POOL-09 剩余培养物", "纸质实验册 NB-HU-2026-借03"],
+      "artifacts_checked": ["ART-HPLC-001", "ART-PEAK-001", "ART-INCUBATOR-LOG"],
+      "unauthorized_removals": ["U盘-WD-7781 内检出 ART-HPLC-001-v1 拷贝与 RUN-2026-001 参数表"],
+      "clearance": "denied",
+      "checker_id": "HU-JIAOSHOU",
+      "note": "资料封存待删除确认，暂停办理离岗；禁止以个人邮箱继续访问 NAS"
+    }
+  },
+  {
+    "event_id": "EVT-039",
+    "event_type": "PERSONNEL_DEPARTURE_CHECKED",
+    "aggregate_type": "personnel_record",
+    "aggregate_id": "PER-A10",
+    "occurred_at": "2026-07-15T17:00:00+08:00",
+    "version": 1,
+    "lab_id": "LAB-A",
+    "summary": "A10 轮岗离岗检查：权限回收、资料与冻存管清点齐全，准予放行",
+    "payload": {
+      "person_id": "A10",
+      "departure_date": "2026-07-16",
+      "data_access_revoked_at": "2026-07-15T16:30:00+08:00",
+      "materials_returned": ["冻存盒 LN2-A3 盒12/14 钥匙与盘点表"],
+      "artifacts_checked": ["ART-SSR-RAW", "ART-SSR-CALL", "ART-HPLC-001", "ART-PEAK-001"],
+      "unauthorized_removals": [],
+      "clearance": "granted",
+      "checker_id": "HU-JIAOSHOU"
+    }
+  },
+  {
+    "event_id": "EVT-040",
+    "event_type": "CLAIM_WITHDRAWN",
+    "aggregate_type": "research_claim",
+    "aggregate_id": "CLAIM-2026-HIGH-01",
+    "occurred_at": "2026-08-12T09:00:00+08:00",
+    "version": 2,
+    "lab_id": "LAB-A",
+    "summary": "撤回高产主张：LAB-C 独立复测绝对值显著偏低，黄芪甲苷标准品配制偏差使绝对定量不可靠",
+    "payload": {
+      "claim_id": "CLAIM-2026-HIGH-01",
+      "reason": "标准品配制偏差导致 RUN-2026-001 绝对定量不可靠；LAB-C 同方案复测（RUN-LABC-2026-003）仅 1.71 mg/g DW。倍数结论与绝对产量主张一并撤回，待统一标物重测。",
+      "withdrawn_by": "HU-JIAOSHOU",
+      "note": "已通知投稿期刊与全部材料持有方；原始色谱与两版分析均保留备查"
+    }
+  }
+]

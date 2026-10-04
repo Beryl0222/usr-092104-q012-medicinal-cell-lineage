@@ -1,6 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "中药细胞株科研谱系领域事件",
+  "$id": "https://lineage.example/contracts/domain.schema.json",
+  "title": "中药细胞株科研谱系领域事件信封",
+  "description": "跨实验室交换的最小信封。新增字段均为可选，旧事件（仅七个必填字段）仍然有效；生产事件应携带 payload，并经 payloads.schema.json 按事件类型校验。",
   "type": "object",
   "required": [
     "event_id",
@@ -14,16 +16,31 @@
   "properties": {
     "event_id": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "全局唯一事件标识，重复收录按同一事件幂等处理。"
     },
     "event_type": {
       "type": "string",
       "enum": [
         "MATERIAL_ACCESSIONED",
         "PASSAGE_RECORDED",
+        "MATERIAL_ALIQUOTED",
+        "MATERIAL_POOLED",
+        "CONSTRUCT_INTRODUCED",
+        "QC_PERFORMED",
+        "LINEAGE_QUARANTINED",
+        "LINEAGE_RELEASED",
+        "LABEL_DISPUTE_FILED",
+        "LABEL_DISPUTE_RESOLVED",
         "RUN_COMPLETED",
+        "ARTIFACT_VERSIONED",
         "CLAIM_REGISTERED",
-        "TRANSFER_APPROVED"
+        "CLAIM_WITHDRAWN",
+        "TRANSFER_APPROVED",
+        "MATERIAL_SHIPPED",
+        "MATERIAL_RECEIVED",
+        "PERSONNEL_DEPARTURE_CHECKED",
+        "RETENTION_POLICY_DECLARED"
       ]
     },
     "aggregate_type": {
@@ -31,8 +48,14 @@
       "enum": [
         "biological_material",
         "culture_passage",
+        "gene_construct",
         "experiment_run",
-        "research_claim"
+        "data_artifact",
+        "research_claim",
+        "material_transfer",
+        "label_dispute",
+        "personnel_record",
+        "retention_policy"
       ]
     },
     "aggregate_id": {
@@ -41,15 +64,35 @@
     },
     "occurred_at": {
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "description": "事实实际发生时间。纸质记录补录时可为过去时间。"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "事件录入本系统的时间；补录历史纸质笔记时与 occurred_at 区分。"
     },
     "version": {
       "type": "integer",
-      "minimum": 1
+      "minimum": 1,
+      "description": "同一 aggregate_id 内事件按 version 严格递增，仅追加，不回改。"
     },
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "lab_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "事件来源实验室标识。"
+    },
+    "source_note": {
+      "type": "string",
+      "description": "证据出处备注，如纸质实验册卷页、冻存盒编号、转录人。"
+    },
+    "payload": {
+      "type": "object",
+      "description": "按 event_type 定义的类型化载荷，见 payloads.schema.json。"
     }
   },
   "additionalProperties": true
